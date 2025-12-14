@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  --animate-chronosphere: chronosphere 20s ease infinite;
+
+  @keyframes chronosphere {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
 }
 
+:root {
+  /* Futuristic Chronosphere Palette (Deep Space) */
+  --background: oklch(0.1 0.02 240);
+  /* Deep Void Blue Base */
+  --foreground: oklch(0.98 0 0);
+  /* White Text */
+
+  --card: oklch(0.15 0.05 260 / 0.4);
+  --card-foreground: oklch(0.98 0 0);
+
+  --popover: oklch(0.1 0.05 260 / 0.8);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --primary: oklch(0.6 0.18 250);
+  /* Neon Blue */
+  --primary-foreground: oklch(0.98 0 0);
+
+  --secondary: oklch(0.2 0.05 280);
+  --secondary-foreground: oklch(0.98 0 0);
+
+  --muted: oklch(0.2 0.02 260);
+  --muted-foreground: oklch(0.7 0.02 260);
+
+  --accent: oklch(0.5 0.2 190);
+  /* Cyan */
+  --accent-foreground: oklch(0.98 0 0);
+
+  --destructive: oklch(0.5 0.2 20);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.3 0.05 260 / 0.3);
+  --input: oklch(0.2 0.05 260 / 0.5);
+  --ring: oklch(0.5 0.2 250);
+
+  --radius: 0.75rem;
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-xl;
+}
+
+/* Chronosphere Background */
+.chronosphere-bg {
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+  background-size: 400% 400%;
+  animation: chronosphere 15s ease infinite;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background text-foreground antialiased;
 }
